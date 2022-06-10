@@ -1,0 +1,22 @@
+using UnityEngine;
+using UnityEditor;
+
+public class #SCRIPTNAME# : EditorWindow
+{
+	[MenuItem()]
+	public static void CreateAndShow()
+	{
+		var myWindow = GetWindow<#SCRIPTNAME#>();
+		myWindow.PreShow();
+		
+	}
+	
+	// PreShow is called before showing the window
+	private void PreShow()
+	{
+	}
+
+	private void OnGUI()
+	{
+	}
+}

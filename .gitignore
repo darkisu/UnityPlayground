@@ -72,6 +72,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 .vsconfig
 
-# EffectExamples for test purpose
-/[Aa]ssets/[Ee]ffectExamples/*
-/[Aa]ssets/[Ee]ffectExamples.meta
+# ExperimentAssets for test purpose
+/[Aa]ssets/[Ee]xperimentAssets/*
+/[Aa]ssets/[Ee]xperimentAssets.meta
