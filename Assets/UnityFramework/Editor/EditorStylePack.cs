@@ -6,21 +6,22 @@ namespace Darkisu
 {
     public class EditorGUIStylePack
     {
-        private GUIStyle _internalMiddleTitle;
+        private GUIStyle _internalLargeMessage;
 
-        public GUIStyle MiddleTitle
+        public GUIStyle LargeMessage
         {
             get
             {
-                if (_internalMiddleTitle == null)
+                if (_internalLargeMessage == null)
                 {
-                    _internalMiddleTitle = new GUIStyle()
+                    _internalLargeMessage = new GUIStyle()
                     {
                         fontSize = 26,
                         alignment = TextAnchor.MiddleCenter,
+                        wordWrap = true,
                     };
                 }
-                return _internalMiddleTitle;
+                return _internalLargeMessage;
             }
         }
     }

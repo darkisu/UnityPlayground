@@ -10,6 +10,7 @@ namespace Darkisu.Performance
     {
         #region Particle Settings
         private RandomSeedCache _randomSeedCache = new RandomSeedCache();
+        private PlayStatusCache _playStatusCache = new PlayStatusCache();
         public ParticleUnit()
         {
         }
@@ -29,26 +30,30 @@ namespace Darkisu.Performance
             get => _target;
             set
             {
-                var originalTime = Time;
-                var originalPlaybackSpeed = IsValid ? PlaybackSpeed : 1;
-                var originalIsPlaying = IsPlaying;
-
-                if (originalIsPlaying)
+                if (value != _target)
                 {
-                    Stop();
+                    var originalTime = Time;
+                    var originalPlaybackSpeed = IsValid ? PlaybackSpeed : 1;
+                    var originalIsPlaying = IsPlaying;
+
+                    if (originalIsPlaying)
+                    {
+                        Stop();
+                    }
+                    _playStatusCache.Restore();
+                    _target = value;
+                    _playStatusCache.Cache();
+                    var mainModule = Target.main;
+                    mainModule.playOnAwake = false;
+
+                    if (!originalIsPlaying)
+                    {
+                        Stop();
+                    }
+
+                    Time = originalTime;
+                    PlaybackSpeed = originalPlaybackSpeed;
                 }
-
-                _target = value;
-                var mainModule = _target.main;
-                mainModule.playOnAwake = false;
-
-                if (!originalIsPlaying)
-                {
-                    Stop();
-                }
-
-                Time = originalTime;
-                PlaybackSpeed = originalPlaybackSpeed;
             }
         }
         [SerializeField]
@@ -119,6 +124,11 @@ namespace Darkisu.Performance
                 if (IsValid)
                 {
                     var mainModule = Target.main;
+                    if (_playStatusCache.TargetSystem != Target)
+                    {
+                        _playStatusCache.TargetSystem = Target;
+                        _playStatusCache.Cache();
+                    }
                     mainModule.simulationSpeed = value;
                 }
                 if (IsSelfUpdating)
@@ -153,7 +163,7 @@ namespace Darkisu.Performance
             if (IsValid)
             {
                 Target.Play();
-                _randomSeedCache.RootSystem = Target;
+                _randomSeedCache.TargetSystem = Target;
                 _randomSeedCache.Cache();
             }
         }
