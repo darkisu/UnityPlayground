@@ -7,12 +7,15 @@ namespace Darkisu.Timer
 {
     public class Timer : TimerBase
     {
-        private uint _internalRepeatCount = 0;
         /// <summary>
         /// How many times should this timer trigger events
         /// Zero is unlimited
         /// </summary>
-        public uint RepeatingCount { get; set; }
+        public uint RepeatingCount 
+        { 
+            get; 
+            set; 
+        }
         private uint _executedCount;
         public event Action OnRepeatEnds;
 

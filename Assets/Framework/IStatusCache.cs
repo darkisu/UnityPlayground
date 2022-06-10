@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Darkisu
 {
-    public static class IListExtension
+    public interface IStatusCache
     {
+        public void Cache();
+        public void Restore();
     }
 }
