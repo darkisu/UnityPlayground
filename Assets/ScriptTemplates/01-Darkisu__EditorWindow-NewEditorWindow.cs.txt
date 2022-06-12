@@ -7,13 +7,12 @@ public class #SCRIPTNAME# : EditorWindow
 	public static void CreateAndShow()
 	{
 		var myWindow = GetWindow<#SCRIPTNAME#>();
-		myWindow.PreShow();
-		
+		myWindow.Show();
 	}
-	
-	// PreShow is called before showing the window
-	private void PreShow()
+
+	private void OnEnable()
 	{
+		//Setup style here
 	}
 
 	private void OnGUI()
