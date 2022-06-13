@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +45,70 @@ namespace Darkisu
             var elevation = Mathf.Asin(cartesianVec.y / radius);
             var polar = Mathf.Atan(cartesianVec.z / cartesianVec.x);
             return new Vector3(radius, elevation, polar);
+        }
+    }
+
+    [Serializable]
+    public struct SphericalVector
+    {
+        [SerializeField]
+        private float _radius;
+        public float Radius
+        {
+            get => _radius;
+            set
+            {
+                _radius = Mathf.Max(0, value);
+            }
+        }
+
+        [SerializeField]
+        private float _elevation;
+        public float Elevation
+        {
+            get => _elevation;
+            set
+            {
+                _elevation = Mathf.Clamp(value, -90, 90);
+            }
+        }
+        [SerializeField]
+        private float _polar;
+        public float Polar
+        {
+            get => _polar;
+            set
+            {
+                while (value < 0)
+                {
+                    value += 360f;
+                }
+
+                while (value > 360f)
+                {
+                    value -= 360f;
+                }
+
+                _polar = value;
+            }
+        }
+
+        /// <summary>
+        /// Get a vector3 version of this vector
+        /// </summary>
+        public Vector3 AsVector3
+        {
+            get => new Vector3(Radius, Polar * Mathf.Deg2Rad, Elevation * Mathf.Deg2Rad);
+        }
+
+        /// <summary>
+        /// Call it in Monobehiviuor.OnValidate for input restriction
+        /// </summary>
+        public void OnValidate()
+        {
+            Radius = _radius;
+            Elevation = _elevation;
+            Polar = _polar;
         }
     }
 }
