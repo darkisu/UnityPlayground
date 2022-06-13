@@ -29,8 +29,8 @@ namespace Darkisu
             Vector3 result = new Vector3();
             result.y = radius * Mathf.Sin(clampedElevation);
             var xyProj = radius * Mathf.Cos(clampedElevation);
-            result.x = xyProj * Mathf.Cos(polar);
-            result.z = xyProj * Mathf.Sin(polar);
+            result.x = xyProj * Mathf.Sin(polar);
+            result.z = xyProj * -Mathf.Cos(polar);
             return result;
         }
         /// <summary>
