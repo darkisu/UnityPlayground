@@ -23,7 +23,7 @@ namespace Darkisu
             var polar = sphericalVec.z;
 
             var nintyRad = 90 * Mathf.Deg2Rad;
-            var clampedElevation = Mathf.Clamp(elevation, nintyRad, -nintyRad);
+            var clampedElevation = Mathf.Clamp(elevation, -nintyRad, nintyRad);
 
             
             Vector3 result = new Vector3();
@@ -98,7 +98,7 @@ namespace Darkisu
         /// </summary>
         public Vector3 AsVector3
         {
-            get => new Vector3(Radius, Polar * Mathf.Deg2Rad, Elevation * Mathf.Deg2Rad);
+            get => new Vector3(Radius, Elevation * Mathf.Deg2Rad, Polar * Mathf.Deg2Rad);
         }
 
         /// <summary>
